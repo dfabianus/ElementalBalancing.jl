@@ -1,7 +1,7 @@
 module ElementalBalancing
 
 import LinearAlgebra
-import BioprocessKinetics
+#import BioprocessKinetics
 # Write your package code here.
 function K2S1(r, E, i_known, i_unknown)
     # Q is a vector of the supply rates and exhaust rates measured at the bioreactor
