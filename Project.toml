@@ -4,7 +4,6 @@ authors = ["Fabian Müller"]
 version = "1.0.0-DEV"
 
 [deps]
-BioprocessKinetics = "ca03edca-702a-487a-9f32-b26b17538018"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 
 [compat]
