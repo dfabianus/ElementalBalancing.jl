@@ -46,7 +46,7 @@ function K2S1m!(dx,x,p,t)
          4.113 4 0 -4]
     
     c_S = x[2] * p.V_L(t)
-    qS = p.qSmax(t) * BioprocessKinetics.monod(c_S, p.kS(t))
+    qS = p.qSmax(t) * c_S / (p.kS(t) + c_S)
     rS = -qS * x[1]
 
     # constructing Q and r in mol/h and g/h
