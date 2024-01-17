@@ -1,9 +1,3 @@
-
-
-function solve(prob::EBALProblem)
-    
-end
-
 function solve_rc(Ec, Em, rm)
     return -pinv(Ec) * Em * rm
 end
@@ -30,7 +24,7 @@ function P(Rred, sigma)
 end
 
 # Reconciliation of measured and calculated rates
-function delta(Rred, rm, sigma)
+function delta(Rred, rm, sigma, P)
     return (sigma*Rred'*inv(P) * Rred)* rm
 end
 
@@ -47,30 +41,12 @@ solve_rc(prob::EBALProblem, rm) = solve_rc(prob.Ec, prob.Em, rm)
 redundancy(prob::EBALProblem) = redundancy(prob.Ec, prob.Em)
 eps(prob::EBALProblem, rm) = eps(reduced(redundancy(prob)), rm)
 P(prob::EBALProblem) = P(reduced(redundancy(prob)), prob.sigma)
-delta(prob::EBALProblem, rm) = delta(reduced(redundancy(prob)), rm, prob.sigma)
+delta(prob::EBALProblem, rm) = delta(reduced(redundancy(prob)), rm, prob.sigma, P(prob))
 rm_best(prob::EBALProblem, rm) = rm_best(rm, delta(prob, rm))
 h(prob::EBALProblem, rm) = h(eps(prob, rm), P(prob))
 
-A = [1 0 1 1;
-    0 -0.286 -0.286 0.014;
-    0 0.572 0.572 -0.028;
-    0 0.858 0.858 -0.042]
-
-reduced(A)
-
-E = [1 1 1 0;
-    4.113 4 0 -4]
-i_known = [2,3,4]
-i_unknown = [1]
-Em = E[:,i_known]
-Ec = E[:,i_unknown]
-
-redundancy(Ec, Em) |> reduced
-
-Ec_star=(inv(Ec'*Ec))*Ec'
-R=Em-Ec*Ec_star*Em
-U,S,V=svd(R)
-Sconv=[1 0]
-C=Sconv*S
-K=C*S'*U'
-Rred=K*R
+function solve(prob::EBALProblem, rm)
+    return (
+        rm_best = rm_best(prob, rm),
+    )
+end
