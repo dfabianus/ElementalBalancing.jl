@@ -5,3 +5,5 @@
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/dfabianus/ElementalBalancing.jl?svg=true)](https://ci.appveyor.com/project/dfabianus/ElementalBalancing-jl)
 [![Coverage](https://codecov.io/gh/dfabianus/ElementalBalancing.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/dfabianus/ElementalBalancing.jl)
 [![Coverage](https://coveralls.io/repos/github/dfabianus/ElementalBalancing.jl/badge.svg?branch=main)](https://coveralls.io/github/dfabianus/ElementalBalancing.jl?branch=main)
+
+![](fig/application.svg)
