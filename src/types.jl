@@ -1,5 +1,6 @@
 mutable struct EBALProblem
-    Em::Matrix{Float64}
-    Ec::Matrix{Float64}
-    sigma::Matrix{Float64}
+    E::Matrix{Float64}
+    M::Vector{Float64}
+    i_known::Vector{Int}
+    i_unknown::Vector{Int}
 end

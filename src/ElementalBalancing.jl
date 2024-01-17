@@ -1,6 +1,7 @@
 module ElementalBalancing
 
-export reduced, redundancy, solve, EBALProblem
+export reduced, redundancy
+export solve, EBALProblem
 
 using LinearAlgebra
 

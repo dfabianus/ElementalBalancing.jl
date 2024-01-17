@@ -7,3 +7,5 @@
 [![Coverage](https://coveralls.io/repos/github/dfabianus/ElementalBalancing.jl/badge.svg?branch=main)](https://coveralls.io/github/dfabianus/ElementalBalancing.jl?branch=main)
 
 ![](fig/application.svg)
+
+**Further reading**: https://edisciplinas.usp.br/pluginfile.php/5381165/mod_resource/content/1/Chap4.pdf 
