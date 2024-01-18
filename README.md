@@ -33,7 +33,7 @@ rm_best(prob::EBALProblem, rm, F)   = rm_best(rm, delta(prob, rm, F))
 h(prob::EBALProblem, rm, F)         = h(eps(prob, rm), P(prob, F))
 ```
 
-### Example
+### Application example
 First, we define the parameters of the elemental balance $E$, $M$ and $F$ and put them into an `EBALProblem` object.
 ```julia
 # define the parameters of the balancing problem
