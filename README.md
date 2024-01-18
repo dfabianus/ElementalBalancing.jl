@@ -10,6 +10,29 @@
 
 This package implements the elemental balancing concept from [1] in order to calculate unmeasured reaction rates based on other measured rates.
 
+### The algorithm
+An excerpt from the source code, where the calculation functions are described.
+```julia
+# Equations from the book chapter: Gregory N., Material balances and data consistency [1]:
+# https://edisciplinas.usp.br/pluginfile.php/5381165/mod_resource/content/1/Chap4.pdf
+solve_rc(Ec, Em, rm) = -pinv(Ec) * Em * rm              # eq. 4.14
+redundancy(Ec, Em) = Em-Ec*pinv(Ec)*Em                  # eq. 4.17
+eps(Rred, rm) = Rred * rm                               # eq. 4.20
+P(Rred, F) = Rred * F *Rred'                            # eq. 4.24
+delta(Rred, rm, F, P) = (F*Rred'*inv(P) * Rred)* rm     # eq. 4.26
+rm_best(rm, delta) = rm-delta                           # eq. 4.27
+h(eps, P) = eps' * inv(P) * eps                         # eq. 4.29
+
+# Transfering the equations to the EBALProblem type
+solve_rc(prob::EBALProblem, rm)     = solve_rc(Ec(prob), Em(prob), rm)
+redundancy(prob::EBALProblem)       = redundancy(Ec(prob), Em(prob))
+eps(prob::EBALProblem, rm)          = eps(reduced(redundancy(prob)), rm)
+P(prob::EBALProblem, F)             = P(reduced(redundancy(prob)), F)
+delta(prob::EBALProblem, rm, F)     = delta(reduced(redundancy(prob)), rm, F, P(prob, F))
+rm_best(prob::EBALProblem, rm, F)   = rm_best(rm, delta(prob, rm, F))
+h(prob::EBALProblem, rm, F)         = h(eps(prob, rm), P(prob, F))
+```
+
 ### Example
 First, we define the parameters of the elemental balance $E$, $M$ and $F$ and put them into an `EBALProblem` object.
 ```julia
