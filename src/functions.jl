@@ -45,11 +45,17 @@ function solve(prob::EBALProblem, rm, F)
     out_rc_best_mol = solve_rc(prob, out_rm_best_mol)
     out_rm_best_g = translate_rg(out_rm_best_mol, Mm(prob))
     out_rc_best_g = translate_rg(out_rc_best_mol, Mc(prob))
+    out_r_best_mol = zeros(size(prob.E,2))
+    out_r_best_mol[prob.i_known] = out_rm_best_mol
+    out_r_best_mol[i_unknown(prob)] = out_rc_best_mol
+    out_r_best_g = translate_rg(out_r_best_mol, prob.M)
     return (
         rm_best_mol = out_rm_best_mol,
         rc_best_mol = out_rc_best_mol,
+        r_best_mol = out_r_best_mol,
         rm_best_g = out_rm_best_g,
         rc_best_g = out_rc_best_g,
+        r_best_g = out_r_best_g,
         h = h(prob, rm, F),
     )
 end
