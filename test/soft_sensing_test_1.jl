@@ -23,6 +23,8 @@ sol = map(x -> solve(prob, x, F), r)
 rm_best = [measurement.rm_best_mol for measurement in sol]
 rc_best = [measurement.rc_best_mol for measurement in sol]
 
+(rm_best[1]./rm_best[1]')[1,2]
+
 p = plot(raw_data.time, [ri[1] for ri in r], label="Q_S", linewidth = 2,
     size=(500,350),
     legendfontsize = 9,
@@ -50,3 +52,22 @@ savefig(p, joinpath(@__DIR__, "..", "fig", "soft_sensing_test_1.svg"))
 @test sum([ri[2] for ri in rm_best]) > 2858
 @test sum([ri[3] for ri in rm_best]) < -2804
 @test sum([ri[1] for ri in rc_best]) > 1891
+
+#plot(raw_data.time, [(ri./ri')[1,3] for ri in rm_best], label="Y_CO", linewidth = 2)
+p2 = plot(raw_data.time, -[ri[1] for ri in rc_best]./[ri[1] for ri in rm_best], 
+    label="Y_XS", linewidth = 2, ylim = (0, 1),
+    size=(500,350),
+    legendfontsize = 9,
+    titlelocation = :left,
+    bottom_margin=10Plots.px,
+    left_margin=10Plots.px,
+    tickfontsize = 10,
+    xlabelfontsize = 10,
+    ylabelfontsize = 10,
+    grid = false,
+    framestyle = :box,
+    legend=:bottomleft,
+    ylabel = "yield [mol X/mol S]",
+    xlabel = "Time in hours",
+    title = "Elemental balancing rate estimation")
+savefig(p2, joinpath(@__DIR__, "..", "fig", "soft_sensing_test_1_yield.svg"))
