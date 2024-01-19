@@ -81,5 +81,7 @@ plot!(raw_data.time, [ri[1] for ri in rc_best], label="Q_X_reconciled", c=:grey,
 
 ![plot_1](fig/soft_sensing_test_1.svg)
 
+![plot_2](fig/soft_sensing_test_1_yield.svg)
+
 **Further reading**:
 [1] https://edisciplinas.usp.br/pluginfile.php/5381165/mod_resource/content/1/Chap4.pdf 
