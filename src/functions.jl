@@ -1,8 +1,10 @@
+i_unknown(prob::EBALProblem) = setdiff(collect(range(1,size(prob.E,2))), prob.i_known)
+
 # Splitting E and M into known and unknown parts
 Em(prob::EBALProblem) = prob.E[:,prob.i_known]
-Ec(prob::EBALProblem) = prob.E[:,prob.i_unknown]
+Ec(prob::EBALProblem) = prob.E[:,i_unknown(prob)]
 Mm(prob::EBALProblem) = prob.M[prob.i_known]
-Mc(prob::EBALProblem) = prob.M[prob.i_unknown]
+Mc(prob::EBALProblem) = prob.M[i_unknown(prob)]
 ## todo: function to recombine from known and unknown parts
 
 # retranslation between mole and mass basis
