@@ -46,7 +46,7 @@ F = diagm([1, 1, 3])        # variance covariance matrix
 
 prob = EBALProblem(E, M, i_known, i_unknown)
 ```
-Then we load the test data, extract the measured reaction rates, in this case $Q_S$, $Q_{CO2} and $Q_{O2}$ and `solve` the problem for each measurement point in `r`.
+Then we load the test data, extract the measured reaction rates, in this case $Q_S$, $Q_{CO2}$ and $Q_{O2}$ and `solve` the problem for each measurement point in `r`.
 ```julia
 raw_data = CSV.read(path_to_data, DataFrame) 
 r = [[-QS, QCO2, QO2] for (QS, QCO2, QO2) in zip(raw_data.Q_S, raw_data.Q_CO2, raw_data.Q_O2)]
